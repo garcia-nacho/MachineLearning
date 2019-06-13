@@ -1,5 +1,6 @@
   #Chromosome plotter
   #Nacho garcia 2019
+  #garcia.nacho@gmail.com
   #GPL v3
   
   library("cluster")
