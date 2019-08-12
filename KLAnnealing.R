@@ -5,8 +5,7 @@ kl.steep <- 4
 
 KL.Ann <- R6::R6Class("KL.Ann",
                            inherit = KerasCallback,
-                            
-                           
+                          
                            public = list(
                              
                              losses = NULL,
@@ -35,8 +34,8 @@ KL.Ann <- R6::R6Class("KL.Ann",
 
 loss<- function(weight){
           l.f<-function(x, x_decoded_mean){
-           xent_loss <- (original_dim/1.0)*loss_binary_crossentropy(x, x_decoded_mean)
-           kl_loss <- -0.5*k_mean(1 + z_log_var - k_square(z_mean) - k_exp(z_log_var), axis = -1L)
+            xent_loss <- (original_dim/1.0)*loss_binary_crossentropy(x, x_decoded_mean)
+            kl_loss <- -0.5*k_mean(1 + z_log_var - k_square(z_mean) - k_exp(z_log_var), axis = -1L)
             xent_loss + weight*kl_loss}
           return(l.f)
 }
@@ -47,7 +46,7 @@ vae %>% compile(optimizer = "rmsprop", loss = loss(weight) )
 
 history <- KL.Ann$new()
 
-vae %>% fit(
+model %>% fit(
   x_train, x_train, 
   shuffle = TRUE, 
   epochs = 10, 
